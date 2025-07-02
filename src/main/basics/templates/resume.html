@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ personal_info.name }} - Resume</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1>{{ personal_info.name }}</h1>
+            <p class="location">{{ personal_info.location }}</p>
+            <p class="contact">
+                <a href="mailto:{{ personal_info.email }}" class="btn">Email</a>
+                <a href="{{ personal_info.linkedin }}" target="_blank" class="btn">
+                    <i class="fab fa-linkedin"></i> LinkedIn Profile
+                </a>
+            </p>
+        </header>
+
+        <!-- Professional Summary -->
+        <section id="summary" class="section">
+            <h2>Professional Summary</h2>
+            <p>{{ professional_summary }}</p>
+        </section>
+
+        <!-- Skills -->
+        <section id="skills" class="section">
+            <h2>Skills</h2>
+            {% for category, items in skills.items() %}
+            <h4>{{ category }}</h4>
+            <ul>
+                {% for skill in items %}
+                <li><i class="fas fa-check-circle"></i> {{ skill }}</li>
+                {% endfor %}
+            </ul>
+            {% endfor %}
+        </section>
+
+        <!-- Experience -->
+        <section id="experience" class="section">
+            <h2>Experience</h2>
+            {% for job in experience %}
+            <div class="job">
+                <h4>{{ job.title }}</h4>
+                <p>{{ job.company }} | {{ job.location }} | {{ job.duration }}</p>
+                <ul>
+                    {% for detail in job.details %}
+                    <li>{{ detail }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endfor %}
+        </section>
+
+        <!-- Education -->
+        <section id="education" class="section">
+            <h2>Education</h2>
+            {% for edu in education %}
+            <div class="education-item">
+                <h4>{{ edu.degree }}</h4>
+                <p>{{ edu.institution }} | {{ edu.location }} | {{ edu.year }}</p>
+            </div>
+            {% endfor %}
+        </section>
+
+        <!-- Leadership -->
+        <section id="leadership" class="section">
+            <h2>Leadership</h2>
+            <ul>
+                {% for leadership in leadership %}
+                <li>{{ leadership }}</li>
+                {% endfor %}
+            </ul>
+        </section>
+    </div>
+</body>
+</html>
